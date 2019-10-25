@@ -11,6 +11,7 @@ class Bar {
         this.smoking = smoking
         this.nonSmokingArea = nonSmokingArea
         this.reviews = []
+        this.tags = []
     }
     
     getRating() {
@@ -26,6 +27,11 @@ class Bar {
         this.reviews.push(review)
         review.barName = this.name
     }
+
+    addTag(tag) {
+        this.tags.push(tag)
+    }
+
 }
 
 // A review. It does not do much at this point
@@ -33,8 +39,16 @@ class Review {
     constructor(text, rating) {
         this.text = text
         this.rating = rating
+        this.likes = 0
     }
 
+    like() {
+        this.likes += 1
+    }
+
+    dislike() {
+        this.likes -= 1
+    }
 }
 
 // A district. It can have multiple bars
@@ -56,7 +70,8 @@ class District {
 }
 
 // Utility functions
-listedArrayToString = ratingsArray => ratingsArray.reduce((prev, next) => prev + next + "\n", "")
+arrayToListedString = ratingsArray => ratingsArray
+        .reduce((prev, next) => prev + next + "\n", "")
 
 // ----------------------
 // User code
@@ -97,8 +112,8 @@ console.log("Bars and ratings in " + pBerg.name + ": ")
 barsRatings = pBerg.bars.map(bar => bar.name 
     + ": " + bar.getRating() 
     + " (" + bar.reviews.length + " reviews)")
-console.log(listedArrayToString(barsRatings))
-// console.log(barsRatings.reduce((prev, next) => prev + next + "\n", ""))
+console.log(arrayToListedString(barsRatings))
+
 console.log('-----------------------------------------------------------------')
 barWithReviews = pBerg.bars[0]
 console.log('Reviews for ' + barWithReviews.name + ":")
@@ -106,8 +121,11 @@ barReviews = barWithReviews.reviews.map(review =>
     "Rating: " + review.rating + "\n"
     + "Review: " + review.text
 )
-// console.log(barReviews)
-// console.log(barReviews.reduce((prev, next) => prev + next + "\n", ""))
-console.log(listedArrayToString(barReviews))
+
+console.log(arrayToListedString(barReviews))
 console.log('-----------------------------------------------------------------')
+console.log('Like and dislike reviews, sort them by number of likes:')
+pBerg.bars[0].reviews[0].dislike()
+pBerg.bars[0].reviews[1].like()
+console.log(pBerg.bars[0].reviews.sort((a, b) => b.likes - a.likes))
 
