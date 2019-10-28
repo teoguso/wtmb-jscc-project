@@ -1,0 +1,19 @@
+{
+  "name": "wtmb-jscc-project",
+  "version": "1.0.0",
+  "description": "Women Techmakers Berlin JS Crash Course Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teoguso/wtmb-jscc-project.git"
+  },
+  "author": "Matteo Guzzo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teoguso/wtmb-jscc-project/issues"
+  },
+  "homepage": "https://github.com/teoguso/wtmb-jscc-project#readme"
+}

@@ -1,10 +1,9 @@
-console.log('Homework - Week 1')
-console.log('-----------------------------------------------------------------')
 // Non-smoking bars maps - An app to find non-smoking bars or bars with non-smoking areas
 
 const Bar = require("./bar")
-
 const District = require("./district")
+const db = require("./database")
+const geocoding = require("geocoding")
 
 // Utility functions
 arrayToListedString = ratingsArray => ratingsArray
@@ -14,11 +13,12 @@ arrayToListedString = ratingsArray => ratingsArray
 // User code
 // ----------------------
 
+log = console.log
 // Create some bars
-badBar = new Bar("Ecke-Kneipe", true, false)
-familyBar = new Bar("Weinberg", false, false)
+const badBar = new Bar("Ecke-Kneipe", "Schönhauser Allee 13, Berlin", true, false)
+const familyBar = new Bar("Weinberg", "Oranienstrasse 13, Berlin", false, false)
 // Create a district
-pBerg = new District("Prenzlauer Berg")
+const pBerg = new District("Prenzlauer Berg")
 // Add bars to the district
 pBerg.addBar(badBar)
 pBerg.addBar(familyBar)
@@ -36,33 +36,45 @@ familyBar.addReview("Quiet, nice, great service.", 5)
 // Promote a bar in the ditrict
 pBerg.promoteBar(familyBar)
 
-console.log("Sample district object: ")
-console.log(pBerg)
-console.log('-----------------------------------------------------------------')
-console.log("Sample bar object: ")
-console.log(familyBar)
-console.log('-----------------------------------------------------------------')
-console.log("Sample review object: ")
-console.log(familyBar.reviews[0])
-console.log('-----------------------------------------------------------------')
-console.log("Bars and ratings in " + pBerg.name + ": ")
-barsRatings = pBerg.bars.map(bar => bar.name 
+log("Sample district object: ")
+log(pBerg)
+log('-----------------------------------------------------------------')
+log("Sample bar object: ")
+log(familyBar)
+log('-----------------------------------------------------------------')
+log("Sample review object: ")
+log(familyBar.reviews[0])
+log('-----------------------------------------------------------------')
+log("Bars and ratings in " + pBerg.name + ": ")
+const barsRatings = pBerg.bars.map(bar => bar.name 
     + ": " + bar.getRating() 
     + " (" + bar.reviews.length + " reviews)")
-console.log(arrayToListedString(barsRatings))
+log(arrayToListedString(barsRatings))
 
-console.log('-----------------------------------------------------------------')
-barWithReviews = pBerg.bars[0]
-console.log('Reviews for ' + barWithReviews.name + ":")
-barReviews = barWithReviews.reviews.map(review => 
+log('-----------------------------------------------------------------')
+const barWithReviews = pBerg.bars[0]
+log('Reviews for ' + barWithReviews.name + ":")
+const barReviews = barWithReviews.reviews.map(review => 
     "Rating: " + review.rating + "\n"
     + "Review: " + review.text
 )
 
-console.log(arrayToListedString(barReviews))
-console.log('-----------------------------------------------------------------')
-console.log('Like and dislike reviews, sort them by number of likes:')
+log(arrayToListedString(barReviews))
+log('-----------------------------------------------------------------')
+log('Like and dislike reviews, sort them by number of likes:')
 pBerg.bars[0].reviews[0].dislike()
 pBerg.bars[0].reviews[1].like()
-console.log(pBerg.bars[0].reviews.sort((a, b) => b.likes - a.likes))
+log(pBerg.bars[0].reviews.sort((a, b) => b.likes - a.likes))
 
+log('-----------------------------------------------------------------')
+log('Store data and load it back:')
+const fileName = "pberg.json"
+db.save(fileName, pBerg)
+
+log("Loaded data from disk:")
+log(db.load(fileName))
+
+log('---------------------------------------------------------------')
+geocoding({address: familyBar.address}).then(function(results){
+  console.log(results)
+})

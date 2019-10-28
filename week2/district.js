@@ -11,7 +11,7 @@ class District {
     }
 
     promoteBar(bar) {
-        this.topBars.push(bar)
+        this.topBars.push(bar.name)
     }
 }
 
