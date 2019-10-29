@@ -3,7 +3,7 @@
 const Bar = require("./bar")
 const District = require("./district")
 const db = require("./database")
-const geocoding = require("geocoding")
+var NodeGeocoder = require('node-geocoder')
 
 // Utility functions
 arrayToListedString = ratingsArray => ratingsArray
@@ -75,6 +75,22 @@ log("Loaded data from disk:")
 log(db.load(fileName))
 
 log('---------------------------------------------------------------')
-geocoding({address: familyBar.address}).then(function(results){
-  console.log(results)
-})
+var options = {
+  provider: 'openstreetmap',
+ 
+  // Optional depending on the providers
+  httpAdapter: 'https', // Default
+  // apiKey: 'YOUR_API_KEY', // for Mapquest, OpenCage, Google Premier
+  formatter: null         // 'gpx', 'string', ...
+};
+ 
+var geocoder = NodeGeocoder(options)
+
+// Using callback
+geocoder.geocode('Schönhauser Allee 23, Berlin')
+  .then(function(res) {
+  console.log(res);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });

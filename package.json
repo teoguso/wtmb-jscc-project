@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/teoguso/wtmb-jscc-project/issues"
   },
-  "homepage": "https://github.com/teoguso/wtmb-jscc-project#readme"
+  "homepage": "https://github.com/teoguso/wtmb-jscc-project#readme",
+  "dependencies": {
+    "node-geocoder": "^3.25.0"
+  }
 }
