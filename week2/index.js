@@ -75,6 +75,8 @@ log("Loaded data from disk:")
 log(db.load(fileName))
 
 log('---------------------------------------------------------------')
+log('Geocoding address `' + familyBar.address + '`...')
+// Find exact address with geocoder library
 var options = {
   provider: 'openstreetmap',
  
@@ -87,7 +89,8 @@ var options = {
 var geocoder = NodeGeocoder(options)
 
 // Using callback
-geocoder.geocode('Schönhauser Allee 23, Berlin')
+// geocoder.geocode('Schönhauser Allee 23, Berlin')
+geocoder.geocode(familyBar.address)
   .then(function(res) {
   console.log(res);
   })
