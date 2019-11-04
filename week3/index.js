@@ -1,11 +1,14 @@
 // Non-smoking bars maps - An app to find non-smoking bars or bars with non-smoking areas
+(async () => {
+    try {
 
-const Bar = require("./bar")
-const District = require("./district")
-const db = require("./database")
+const Bar = require("./models/bar")
+const District = require("./models/district")
+const db = require("./models/database")
 var NodeGeocoder = require('node-geocoder')
 
 // Utility functions
+log = console.log
 arrayToListedString = ratingsArray => ratingsArray
         .reduce((prev, next) => prev + next + "\n", "")
 
@@ -13,7 +16,6 @@ arrayToListedString = ratingsArray => ratingsArray
 // User code
 // ----------------------
 
-log = console.log
 // Create some bars
 const badBar = new Bar("Ecke-Kneipe", "Schönhauser Allee 13, Berlin", true, false)
 const familyBar = new Bar("Weinberg", "Oranienstrasse 13, Berlin", false, false)
@@ -68,21 +70,16 @@ log(pBerg.bars[0].reviews.sort((a, b) => b.likes - a.likes))
 
 log('-----------------------------------------------------------------')
 log('Store data and load it back:')
-const fileName = "week3/pberg.json"
-// db.save(fileName, pBerg)
+const fileName = "pberg.json"
+db.save(fileName, pBerg)
 
 log("Loaded data from disk:")
-// loadedFile = db.load(fileName, (err, loadedFile))
-callback = (err, loadedFile) => {
-  if (err) {
-    log("HEY! ERROR!", err)
-    return
-  }
-  log(loadedFile)
-  loadedDistrict = District.create(loadedFile)
-  log(loadedDistrict)
-}
-db.load(fileName, callback)
+
+        loadedFile = await db.load(fileName)
+
+const loadedDistrict = District.create(loadedFile)
+
+console.log(loadedDistrict)
 
 log('---------------------------------------------------------------')
 // log('Geocoding address `' + familyBar.address + '`...')
@@ -104,3 +101,7 @@ log('---------------------------------------------------------------')
 //   .catch(function(err) {
 //     console.log(err);
 //   });
+    } catch (e) {
+        log(e)
+    }
+})()

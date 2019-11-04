@@ -1,3 +1,5 @@
+const Bar = require("./bar")
+
 class District {
     constructor(name, bars=[], topBars=[]) {
         this.name = name
@@ -15,7 +17,9 @@ class District {
     }
 
     static create({ name, bars, topBars }) {
-        return new District(name, bars, topBars)
+        const district = new District(name, bars, topBars)
+        district.bars = bars.map(Bar.create)
+        return district
     }
 }
 

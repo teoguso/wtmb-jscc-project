@@ -13,6 +13,11 @@ class Review {
     dislike() {
         this.likes -= 1
     }
+
+    static create({ text, rating }) {
+        const district = new Review(text, rating)
+        return district
+    }
 }
 
 module.exports = Review

@@ -4,7 +4,7 @@ const Review = require("./review")
 // It can be smoking/non-smoking, have a non-smoking area, and have reviews
 // It can return a rating based on the average of ratings in the reviews.
 class Bar {
-    constructor(name, address, smoking, nonSmokingArea, acceptsCreditCard) {
+    constructor(name, address, smoking, nonSmokingArea, acceptsCreditCard = "No") {
         this.name = name
         this.address = address
         this.smoking = smoking
@@ -33,6 +33,10 @@ class Bar {
         this.tags.push(tag)
     }
 
+    static create({ name, address, smoking, nonSmokingArea, acceptsCreditCard }) {
+        const bar = new Bar(name, address, smoking, nonSmokingArea, acceptsCreditCard)
+        return bar
+    }
 }
 
 module.exports = Bar
