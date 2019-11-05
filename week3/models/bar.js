@@ -4,7 +4,7 @@ const Review = require("./review")
 // It can be smoking/non-smoking, have a non-smoking area, and have reviews
 // It can return a rating based on the average of ratings in the reviews.
 class Bar {
-    constructor(name, address, smoking, nonSmokingArea, acceptsCreditCard = "No") {
+    constructor(name, address, smoking, nonSmokingArea, acceptsCreditCard = "No", id) {
         this.name = name
         this.address = address
         this.smoking = smoking
@@ -12,6 +12,7 @@ class Bar {
         this.acceptsCreditCard = acceptsCreditCard
         this.reviews = []
         this.tags = []
+        this.id = id
     }
     
     getRating() {
@@ -33,8 +34,8 @@ class Bar {
         this.tags.push(tag)
     }
 
-    static create({ name, address, smoking, nonSmokingArea, acceptsCreditCard }) {
-        const bar = new Bar(name, address, smoking, nonSmokingArea, acceptsCreditCard)
+    static create({ name, address, smoking, nonSmokingArea, acceptsCreditCard, id }) {
+        const bar = new Bar(name, address, smoking, nonSmokingArea, acceptsCreditCard, id)
         return bar
     }
 }
