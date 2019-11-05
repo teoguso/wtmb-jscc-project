@@ -66,3 +66,4 @@ typings/
 
 # DB temp files
 pberg.json
+*database.json

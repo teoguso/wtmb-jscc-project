@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/teoguso/wtmb-jscc-project#readme",
   "dependencies": {
+    "flatted": "^2.0.1",
     "node-geocoder": "^3.25.0"
   }
 }
