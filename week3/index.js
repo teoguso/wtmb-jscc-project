@@ -85,8 +85,8 @@ async function main() {
         const mydist = await DistrictService.findAll()
         log(mydist)
         log("-------------------------------------")
-        log("BarService.find():")
-        foundBar = await BarService.find(0)
+        log("BarService.find(1):")
+        foundBar = await BarService.find(1)
         log(foundBar)
         log("-------------------------------------")
         // Find exact address with geocoder library
@@ -101,13 +101,13 @@ async function main() {
 
         var geocoder = NodeGeocoder(options)
         // Using callback
-        await geocoder.geocode(familyBar.address)
-            .then(function (res) {
-                console.log(res);
-            })
-            .catch(function (err) {
-                console.log(err);
-            });
+        // await geocoder.geocode(familyBar.address)
+        //     .then(function (res) {
+        //         console.log(res);
+        //     })
+        //     .catch(function (err) {
+        //         console.log(err);
+        //     });
 
     } catch (e) {
         log(e)
