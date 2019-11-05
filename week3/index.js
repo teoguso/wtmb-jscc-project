@@ -71,19 +71,7 @@ async function main() {
         log(pBerg.bars[0].reviews.sort((a, b) => b.likes - a.likes))
 
         log('-----------------------------------------------------------------')
-        log('Store data and load it back:')
-        const fileName = "pberg.json"
-        db.save(fileName, pBerg)
-
-        log("Loaded data from disk:")
-
-        loadedFile = await db.load(fileName)
-
-        const loadedDistrict = District.create(loadedFile)
-
-        console.log(loadedDistrict)
-
-        log('---------------------------------------------------------------')
+        // log('---------------------------------------------------------------')
         // Add bars using the service
         await BarService.add(badBar)
         await BarService.add(familyBar)
