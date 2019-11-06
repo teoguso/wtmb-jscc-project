@@ -32,9 +32,9 @@ app.post('/bar', async (req, res) => {
   res.send(bar)
 })
 
-app.delete('/person/:id', async (req, res) => {
+app.delete('/bar/:id', async (req, res) => {
   id = req.params.id
-  await personService.del(id)
+  await BarService.del(id)
   res.send('OK')
 })
 
