@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1 The number of districts is #{districts.length}
+    if districts.length > 0
+       each district in districts
+           h4 #{district.name}
+    else
+        h4 Add some districts!
