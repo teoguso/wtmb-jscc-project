@@ -4,7 +4,7 @@ const Review = require("./review")
 // It can be smoking/non-smoking, have a non-smoking area, and have reviews
 // It can return a rating based on the average of ratings in the reviews.
 class Bar {
-    constructor(name, address, smoking, nonSmokingArea, acceptsCreditCard = "No", id) {
+    constructor(name, address, smoking = false, nonSmokingArea = false, acceptsCreditCard = "No", id) {
         this.name = name
         this.address = address
         this.smoking = smoking
