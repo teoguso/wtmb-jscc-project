@@ -1,9 +1,9 @@
 const BaseService = require('./base-service')
-const DistrictModel = require('../models/review')
+const ReviewModel = require('../models/review')
 
 class DistrictService extends BaseService {
     constructor() {
-        super(DistrictModel, `${__dirname}/../review-database.json`)
+        super(ReviewModel, `${__dirname}/../review-database.json`)
     }
 }
 
