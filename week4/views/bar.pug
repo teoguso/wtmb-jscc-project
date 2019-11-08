@@ -4,6 +4,7 @@ block content
     h1 The number of bars is #{bars.length}
     if bars.length > 0
        each bar in bars
-           h4 #{bar.name}, #{bar.address}
+           h4 ID: #{bar.id} - #{bar.name}, #{bar.address}
+           p #{bar.params}
     else
         h4 Add some bars!
